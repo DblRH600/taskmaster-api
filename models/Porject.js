@@ -14,9 +14,16 @@ const productSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  tasks: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Task'
+  }],
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 })
-
 
 const Product = mongoose.model('Product', productSchema)
 

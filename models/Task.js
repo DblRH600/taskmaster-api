@@ -17,8 +17,15 @@ const taskSchema = new Schema({
   },
   project: {
     type: Schema.Types.ObjectId,
-    ref: 'Project',
-    required: true
+    ref: 'Project'
+  },
+  user: {
+    type: String,
+    ref: 'User'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 })
 

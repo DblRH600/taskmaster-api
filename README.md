@@ -1,4 +1,4 @@
-# Mod13 SBA: Backend Develpoment
+# Mod15 SBA: Backend Develpoment
 
 This is a solution using Express, MongoDB, Mongoose, bcryot, jsonwebtoken, and dotenv to build out [Module 14 SBA](https://ps-lms.vercel.app/curriculum/se/419).  
 
