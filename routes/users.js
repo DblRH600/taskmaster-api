@@ -14,7 +14,7 @@ router.post('/register', async (req, res) => {
     const token = signToken(user)
     res.status(201).json({ token, user })
   } catch (error) {
-    res.status(400).json(error)
+    res.status(400).json({ message: error.message })
   }
 })
 

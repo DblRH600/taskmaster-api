@@ -31,7 +31,7 @@ router.post('/projects/:projectId/tasks', async (req, res) => {
     res.status(201).json(task)
   } catch (err) {
     console.error(err)
-    res.status(400).json(err)
+    res.status(400).json({ message: err.message })
   }
 })
 
@@ -60,7 +60,7 @@ router.put('/tasks/:taskId', async (req, res) => {
     }
   } catch (err) {
     console.error(err)
-    res.status(500).json(err)
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -86,7 +86,7 @@ router.get('/projects/:projectId/tasks', async (req, res) => {
     res.status(201).json(tasks)
   } catch (err) {
     console.error(err)
-    res.status(400).json(err)
+    res.status(400).json({ message: err.message })
   }
 })
 
@@ -112,6 +112,6 @@ router.delete('/task/:taskId', async (req, res) => {
     res.json({ message: 'Task deleted from project' })
   } catch (err) {
     console.error(err)
-    res.status(500).json(err)
+    res.status(500).json({ message: err.message })
   }
 })

@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     res.status(201).json(project)
   } catch (err) {
     console.error(err)
-    res.status(400).json(err)
+    res.status(400).json({ message: err.message })
   }
 })
 
@@ -45,7 +45,7 @@ router.put('/:id', async (req, res) => {
     res.json(projectUpdate)
   } catch (err) {
     console.error(err)
-    res.status(500).json(err)
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -59,7 +59,7 @@ router.get('/', async (req, res) => {
     res.json(projects)
   } catch (err) {
     console.error(err)
-    res.status(500).json(err)
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -85,7 +85,7 @@ router.get('/:id', async (req, res) => {
     res.json(project)
   } catch (err) {
     console.error(err)
-    res.status(500).json(err)
+    res.status(500).json({ message: err.message })
   }
 })
 
@@ -112,7 +112,7 @@ router.delete('/:id', async (req, res) => {
     res.json({ message: 'Project has been deleted!' })
   } catch (err) {
     console.error(err)
-    res.status(500).json(err)
+    res.status(500).json({ message: err.message })
   }
 })
 
