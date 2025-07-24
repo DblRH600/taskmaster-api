@@ -1,8 +1,8 @@
 import mongoose, { Schema } from 'mongoose'
 
-const productSchema = new Schema({
+const projectSchema = new Schema({
   name: {
-    Type: String,
+    type: String,
     required: true,
     trim: true
   },
@@ -25,6 +25,6 @@ const productSchema = new Schema({
   }
 })
 
-const Product = mongoose.model('Product', productSchema)
+const Project = mongoose.model('Project', projectSchema)
 
-export default Product
+export default Project

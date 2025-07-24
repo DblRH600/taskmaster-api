@@ -8,7 +8,7 @@ const taskSchema = new Schema({
   },
   description: {
     type: String,
-    requried: true
+    required: true
   },
   status: {
     type: String,
@@ -20,7 +20,7 @@ const taskSchema = new Schema({
     ref: 'Project'
   },
   user: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   },
   createdAt: {
@@ -29,6 +29,6 @@ const taskSchema = new Schema({
   }
 })
 
-const Task = mongoose.model('Taks', taskSchema)
+const Task = mongoose.model('Task', taskSchema)
 
 export default Task

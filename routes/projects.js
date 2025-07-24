@@ -1,6 +1,6 @@
 import express from 'express'
-import protect from '../utils/auth.js'
-import Project from '../models/Porject.js'
+import { authMiddleware as protect } from '../utils/auth.js'
+import Project from '../models/Project.js'
 
 const router = express.Router()
 router.use(protect)
@@ -41,6 +41,8 @@ router.put('/:id', async (req, res) => {
         .status(403)
         .json({ message: 'Updates to this project are authorized by the user' })
     }
+
+    await projectUpdate.set(req.body).save()
 
     res.json(projectUpdate)
   } catch (err) {

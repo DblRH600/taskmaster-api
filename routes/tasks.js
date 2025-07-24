@@ -1,7 +1,7 @@
 import express from 'express'
-import protect from '../utils/auth.js'
+import { authMiddleware as protect } from '../utils/auth.js'
 import Task from '../models/Task.js'
-import Project from '../models/Porject.js'
+import Project from '../models/Project.js'
 
 const router = express.Router()
 router.use(protect)
@@ -52,11 +52,9 @@ router.put('/tasks/:taskId', async (req, res) => {
     }
 
     if (!taskUpdate.project.user.equals(req.user._id)) {
-      return res
-        .status(403)
-        .json({
-          message: 'User is not authorized to update tasks on this project'
-        })
+      return res.status(403).json({
+        message: 'User is not authorized to update tasks on this project'
+      })
     }
   } catch (err) {
     console.error(err)
@@ -94,15 +92,15 @@ router.get('/projects/:projectId/tasks', async (req, res) => {
  * DELETE api/tasks/:taskId
  * @description route to delete tasks
  */
-router.delete('/task/:taskId', async (req, res) => {
+router.delete('/tasks/:taskId', async (req, res) => {
   try {
-    const taskDelete = await Task.findByIdAndDelete(req.params.id)
+    const taskDelete = await Task.findByIdAndDelete(req.params.taskId).populate('project')
 
     if (!taskDelete) {
       return res.status(404).json({ message: 'Task not found' })
     }
 
-    if (!taskDelete.user.equals(req.user._id)) {
+    if (!taskDelete.project.user.equals(req.user._id)) {
       return res
         .status(403)
         .json({ message: 'User is not authorized to delete this content' })
@@ -115,3 +113,5 @@ router.delete('/task/:taskId', async (req, res) => {
     res.status(500).json({ message: err.message })
   }
 })
+
+export default router
