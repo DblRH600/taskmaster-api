@@ -25,9 +25,16 @@ router.post('/projects/:projectId/tasks', async (req, res) => {
     }
 
     const task = await Task.create({
-      ...req.body,
-      project: project._id
+      title: req.body.title,
+      description: req.body.description,
+      status: req.body.status || 'To Do',
+      project: project._id,
+      user: req.user._id
     })
+
+    console.log('Created Task', task)
+    project.tasks.push(task._id)
+    await project.save()
     res.status(201).json(task)
   } catch (err) {
     console.error(err)
@@ -94,7 +101,9 @@ router.get('/projects/:projectId/tasks', async (req, res) => {
  */
 router.delete('/tasks/:taskId', async (req, res) => {
   try {
-    const taskDelete = await Task.findByIdAndDelete(req.params.taskId).populate('project')
+    const taskDelete = await Task.findByIdAndDelete(req.params.taskId).populate(
+      'project'
+    )
 
     if (!taskDelete) {
       return res.status(404).json({ message: 'Task not found' })

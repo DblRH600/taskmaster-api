@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
  */
 router.put('/:id', async (req, res) => {
   try {
-    const projectUpdate = await Project.findById(req.params.id)
+    const projectUpdate = await Project.findById(req.params.id, { new: true })
 
     if (!projectUpdate) {
       return res
